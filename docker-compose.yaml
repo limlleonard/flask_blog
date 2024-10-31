@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./instance/site.db:/app/instance/site.db  # Maps the .db file
+      - ./instance:/app/instance  # Map the entire folder to preserve .db location and app files
