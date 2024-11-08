@@ -2,5 +2,6 @@
 test_sqlite.py
 test_psql.py
 test_env.py
+__pycache__
 docker-compose.yaml
 Dockerfile
