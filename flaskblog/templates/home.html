@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
     {% for post in posts %}
-        <article class="media content-section">
+        <article class="media content-section {{ post.topic }}">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ post.author.username }}</a>
+              <small class="mr-2">{{ post.topic }}</small>
               <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-              <small class="text-muted">{{ post.topic }}</small>
             </div>
             <h4><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h4>
             <p class="article-content">{{ post.content }}</p>

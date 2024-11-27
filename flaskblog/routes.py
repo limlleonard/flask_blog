@@ -2,7 +2,7 @@ import os
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
-from flaskblog import app, db, bcrypt
+from flaskblog import app, db, bcrypt, topics
 from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from flaskblog.models import Benutzer, Post
 from flask_login import login_user, current_user, logout_user, login_required
@@ -91,13 +91,16 @@ def account():
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        post = Post(
+            title=form.title.data, 
+            topic=form.topic.data, 
+            content=form.content.data, 
+            author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('home'))
-    return render_template('create_post.html', title='New Post',
-                           form=form, legend='New Post')
+    return render_template('create_post.html', title='New Post', form=form, legend='New Post')
 
 
 @app.route("/post/<int:post_id>")
